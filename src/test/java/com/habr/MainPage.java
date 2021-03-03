@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.lang.model.element.Element;
 
+import java.util.List;
+
 import static com.habr.Utils.BASE_URL;
 
 public class MainPage {
@@ -28,6 +30,14 @@ public class MainPage {
     @FindBy(className = "n-dropdown-menu_profile")
     private WebElement userDropDownMenu;
 
+    @FindBy(className = "jGrowl-close")
+    private WebElement closeMessageButton;
+
+    @FindBy(className = "post_preview")
+    private List<WebElement> postItems;
+
+    private By messageFavorite = By.className("jGrowl-message");
+
     private By loginButton = By.id("login");
 
     private By dropdownUserButton = By.className("dropdown_user");
@@ -36,12 +46,28 @@ public class MainPage {
 
     private By settingsButton = By.xpath("//a[descendant::*[name()=\"use\" and contains(@*, 'settings')]]");
 
+    private By favoritesButton = By.linkText("Закладки");
+
+    private By postTitle = By.className("post__title");
+
+    private By postBody = By.className("post__body");
+
+    private By addToFavoritesButton = By.cssSelector("button[title='Добавить в закладки']");
+
+    private By removeFromFavoritesButton = By.cssSelector("button[title='Удалить из закладок']");
+
+//    private By closeMessageButton = By.className("jGrowl-close");
+
     public void loginButtonClick() {
         mainNavbar.findElement(loginButton).click();
     }
 
     public void waitElement(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void closeMessageClick() {
+        closeMessageButton.click();
     }
 
 //    public void clickElement(By locator) {
@@ -54,6 +80,40 @@ public class MainPage {
 
     public void loginButtonIsDisplayedWait() {
         this.waitElement(loginButton);
+    }
+
+    public String getPostTitle() {
+        WebElement item = this.postItems.get(0);
+        return item.findElement(postTitle).getText();
+    }
+
+    public void favoritesButtonClick() {
+        this.waitElement(favoritesButton);
+//        this.settingsButtonIsDisplayedWait();
+        userDropDownMenu.findElement(favoritesButton).click();
+    }
+
+    public void addPostToFavorites() {
+//        try {
+//            Thread.sleep(10000);
+//        }catch (InterruptedException e) {}
+//        if (!driver.findElement(postTitle).isDisplayed()) {
+//        waitElement(postTitle);
+//        }
+        waitElement(postBody);
+        WebElement item = this.postItems.get(0);
+//        this.addedCheckAndRemovingFromFavorites();
+        item.findElement(addToFavoritesButton).click();
+        waitElement(messageFavorite);
+        closeMessageClick();
+    }
+
+    public void addedCheckAndRemovingFromFavorites() {
+        WebElement item = this.postItems.get(0);
+        if (item.findElement(removeFromFavoritesButton).isDisplayed()) {
+            item.findElement(removeFromFavoritesButton).click();
+            waitElement(messageFavorite);
+        }
     }
 
     public boolean loginButtonIsDisplayed() {
@@ -104,8 +164,8 @@ public class MainPage {
     }
 
     public void open() {
-        if (driver.getCurrentUrl().contains(BASE_URL))
-            return;
+//        if (driver.getCurrentUrl().contains(BASE_URL))
+//            return;
 
         driver.get(BASE_URL);
         // TODO Иногда возникает ошибка, нужно разобраться

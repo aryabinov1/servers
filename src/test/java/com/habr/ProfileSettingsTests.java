@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.habr.CommonFunctions.loginCheckAndSignIn;
 
-public class ProfileSettingsTests extends Prepare{
+public class ProfileSettingsTests extends Prepare {
     @Test(testName = "Should change name")
     public void changeNameField () {
 
@@ -208,12 +208,14 @@ public class ProfileSettingsTests extends Prepare{
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingCountryWait();
         profileSettingsPage.SelectRandomCountrySelectorItem();
         profileSettingsPage.submitButtonClickAndSuccessfullWait();
         String previousValue = profileSettingsPage.getCountryFieldText();
         mainPage.open();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingCountryWait();
 //        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getCountryFieldText());
     }
@@ -228,14 +230,16 @@ public class ProfileSettingsTests extends Prepare{
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingCountryWait();
         profileSettingsPage.SelectRandomCountrySelectorItem();
-        profileSettingsPage.loadingWait();
+        profileSettingsPage.loadingRegionWait();
         profileSettingsPage.SelectRandomRegionSelectorItem();
         profileSettingsPage.submitButtonClickAndSuccessfullWait();
         String previousValue = profileSettingsPage.getRegionFieldText();
         mainPage.open();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingRegionWait();
 //        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getRegionFieldText());
     }
@@ -250,16 +254,18 @@ public class ProfileSettingsTests extends Prepare{
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingCountryWait();
         profileSettingsPage.SelectRandomCountrySelectorItem();
-        profileSettingsPage.loadingWait();
+        profileSettingsPage.loadingRegionWait();
         profileSettingsPage.SelectRandomRegionSelectorItem();
-        profileSettingsPage.loadingWait();
+        profileSettingsPage.loadingCityWait();
         profileSettingsPage.SelectRandomCitySelectorItem();
         profileSettingsPage.submitButtonClickAndSuccessfullWait();
         String previousValue = profileSettingsPage.getCityFieldText();
         mainPage.open();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
+        profileSettingsPage.loadingCityWait();
 //        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getCityFieldText());
     }

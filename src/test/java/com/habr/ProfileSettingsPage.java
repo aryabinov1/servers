@@ -54,14 +54,25 @@ public class ProfileSettingsPage {
     // TODO Переделать xpath
     private By citySelector = By.xpath("/html/body/div[1]/div[3]/div/div/div[1]/div[2]/div/form/div[3]/div/div/div[3]/select");
 
-    private By loadingIcon = By.className("h-form-select_is-loading");
-
     public void messageSuccessfullWait () {
         wait.until(ExpectedConditions.visibilityOfElementLocated(messageSuccessfull));
     }
-    public void loadingWait() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loadingIcon));
-        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(loadingIcon)));
+
+    // h-form-select h-form-controls__item h-form-select_large h-form-select_is-loading h-form-select_is-disabled
+    public void loadingCountryWait() {
+        this.loadingWait(countrySelector);
+    }
+
+    public void loadingRegionWait() {
+        this.loadingWait(regionSelector);
+    }
+
+    public void loadingCityWait() {
+        this.loadingWait(citySelector);
+    }
+
+    public void loadingWait(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public String getCountryFieldText() {
@@ -108,6 +119,14 @@ public class ProfileSettingsPage {
         this.messageSuccessfullWait();
         return settingsSection.findElement(messageSuccessfull).isDisplayed();
     }
+
+//    public void optionNotEmpty(By locator) {
+//        List<WebElement> dropDownItem;
+//        do {
+//        Select dropdown = new Select(settingsSection.findElement(locator));
+//        dropDownItem = dropdown.getOptions();
+//        } while (dropDownItem.size() != 0);
+//    }
 
     public void NameFieldChangingAndSubmit() {
         settingsSection.findElement(nameField).clear();
@@ -197,7 +216,7 @@ public class ProfileSettingsPage {
         List<WebElement> dropDownItem = dropdown.getOptions();
         do  {
             Random rand = new Random();
-            int index = rand.nextInt(dropDownItem.size() - 1);
+            int index = rand.nextInt(9);
 //            js.executeScript("arguments[0].scrollIntoView(true);", this.settingsSection.findElement(countrySelector));
             dropdown.selectByIndex(index);
 //            dropdown.selectByVisibleText("Австрия");

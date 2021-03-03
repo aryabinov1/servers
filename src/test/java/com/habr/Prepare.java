@@ -31,6 +31,7 @@ public class Prepare {
 
     @AfterSuite
     public void cleanUp() {
+        //TODO Проверить закладки и удалить все
         driver.manage().deleteAllCookies();
         driver.close();
     }
