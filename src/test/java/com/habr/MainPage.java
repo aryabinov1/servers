@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.lang.model.element.Element;
+
 import static com.habr.Utils.BASE_URL;
 
 public class MainPage {
@@ -32,45 +34,72 @@ public class MainPage {
 
     private By signOutButton = By.xpath("//a[descendant::*[name()=\"use\" and contains(@*, 'logout')]]");
 
+    private By settingsButton = By.xpath("//a[descendant::*[name()=\"use\" and contains(@*, 'settings')]]");
+
     public void loginButtonClick() {
         mainNavbar.findElement(loginButton).click();
     }
 
-    public void userButtonIsDisplayedWait() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownUserButton));
+    public void waitElement(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+//    public void clickElement(By locator) {
+//        driver.findElement(locator).click();
+//    }
+
+//    public void userButtonIsDisplayedWait() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownUserButton));
+//    }
+
     public void loginButtonIsDisplayedWait() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
+        this.waitElement(loginButton);
     }
 
     public boolean loginButtonIsDisplayed() {
         try {
-            this.loginButtonIsDisplayedWait();
+//            this.loginButtonIsDisplayedWait();
+            this.waitElement(loginButton);
         } catch (TimeoutException e) {
             return false;
         }
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownUserButton));
         return mainNavbar.findElement(loginButton).isDisplayed();
     }
 
-    public void signOutButtonIsDisplayedWait() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(signOutButton));
+//    public void signOutButtonIsDisplayedWait() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(signOutButton));
+//    }
+
+//    public void settingsButtonIsDisplayedWait() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsButton));
+//    }
+
+    public void settingsButtonClick() {
+        this.waitElement(settingsButton);
+//        this.settingsButtonIsDisplayedWait();
+        userDropDownMenu.findElement(settingsButton).click();
     }
 
     public boolean userButtonIsDisplayed() {
-        this.userButtonIsDisplayedWait();
+        try {
+            this.waitElement(dropdownUserButton);
+//        this.userButtonIsDisplayedWait();
+        } catch (TimeoutException e) {
+            return false;
+        }
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownUserButton));
         return mainNavbar.findElement(dropdownUserButton).isDisplayed();
     }
 
     public void userButtonClick() {
-        this.userButtonIsDisplayedWait();
+//        this.userButtonIsDisplayedWait();
+        this.waitElement(dropdownUserButton);
         mainNavbar.findElement(dropdownUserButton).click();
     }
 
     public void signOutButtonClick() {
-        this.signOutButtonIsDisplayedWait();
+        this.waitElement(signOutButton);
+//        this.signOutButtonIsDisplayedWait();
         userDropDownMenu.findElement(signOutButton).click();
     }
 

@@ -26,6 +26,7 @@ public class Prepare {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_LOCATION);
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
+        driver.manage().window().maximize();
     }
 
     @AfterSuite

@@ -11,7 +11,7 @@ import static com.habr.Utils.LOGIN;
 import static com.habr.Utils.PASSWORD;
 import static com.habr.CommonFunctions.*;
 
-public class Tests extends Prepare {
+public class LoginLogoutTests extends Prepare {
 
 //    @AfterTest
 //    public void cleanUp() {
@@ -26,6 +26,7 @@ public class Tests extends Prepare {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 //        CommonFunctions commonFunctions = new CommonFunctions();
         mainPage.open();
+        loginCheckAndSignOut();
 //        try {
 //            Thread.sleep(2000);
 //        }catch (InterruptedException e) {}
