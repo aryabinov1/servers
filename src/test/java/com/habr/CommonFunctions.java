@@ -1,10 +1,8 @@
 package com.habr;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.nio.charset.Charset;
 import java.util.Random;
 
 import static com.habr.Utils.LOGIN;
@@ -25,7 +23,6 @@ public class CommonFunctions {
 
     public static void loginCheckAndSignOut() {
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-//        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         if (mainPage.userButtonIsDisplayed()) {
             mainPage.userButtonClick();
             mainPage.signOutButtonClick();
@@ -34,8 +31,8 @@ public class CommonFunctions {
     }
 
     public static String generateRandomString(Integer countChar) {
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
+        int leftLimit = 97;
+        int rightLimit = 122;
         int targetStringLength = countChar;
         Random random = new Random();
 

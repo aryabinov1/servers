@@ -11,20 +11,14 @@ public class ProfileSettingsTests extends Prepare {
     public void changeNameField () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
-//        mainPage.loginButtonClick();
-//        loginPage.LogInFieldsFillingAndSubmit(LOGIN, PASSWORD);
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
         profileSettingsPage.NameFieldChangingAndSubmit();
         String previousValue = profileSettingsPage.getNameFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getNameFieldText());
     }
 
@@ -32,7 +26,6 @@ public class ProfileSettingsTests extends Prepare {
     public void changeSpecializationField () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
@@ -40,10 +33,7 @@ public class ProfileSettingsTests extends Prepare {
         mainPage.settingsButtonClick();
         profileSettingsPage.SpecializationFieldChangingAndSubmit();
         String previousValue = profileSettingsPage.getSpecializationFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getSpecializationFieldText());
     }
 
@@ -51,7 +41,6 @@ public class ProfileSettingsTests extends Prepare {
     public void changeGenderSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
@@ -59,10 +48,7 @@ public class ProfileSettingsTests extends Prepare {
         mainPage.settingsButtonClick();
         profileSettingsPage.SelectRandomGenderItemAndSubmit();
         String previousValue = profileSettingsPage.getGenderFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getGenderFieldText());
     }
 
@@ -70,21 +56,14 @@ public class ProfileSettingsTests extends Prepare {
     public void notChangeDaySelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(true);
-        profileSettingsPage.SelectRandomMonthSelectorItem(false);
-        profileSettingsPage.SelectRandomYearSelectorItem(false);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(true, false, false);
         String previousValue = profileSettingsPage.getDayFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertNotEquals(previousValue, "Число");
     }
 
@@ -92,21 +71,14 @@ public class ProfileSettingsTests extends Prepare {
     public void notChangeMonthSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(false);
-        profileSettingsPage.SelectRandomMonthSelectorItem(true);
-        profileSettingsPage.SelectRandomYearSelectorItem(false);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(false, true, false);
         String previousValue = profileSettingsPage.getMonthFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertNotEquals(previousValue, "Месяц");
     }
 
@@ -114,21 +86,14 @@ public class ProfileSettingsTests extends Prepare {
     public void notChangeYearSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(false);
-        profileSettingsPage.SelectRandomMonthSelectorItem(false);
-        profileSettingsPage.SelectRandomYearSelectorItem(true);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(false, false, true);
         String previousValue = profileSettingsPage.getYearFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertNotEquals(previousValue, "Год");
     }
 
@@ -136,21 +101,14 @@ public class ProfileSettingsTests extends Prepare {
     public void changeDaySelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(true);
-        profileSettingsPage.SelectRandomMonthSelectorItem(true);
-        profileSettingsPage.SelectRandomYearSelectorItem(true);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(true, true, true);
         String previousValue = profileSettingsPage.getDayFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getDayFieldText());
     }
 
@@ -158,21 +116,14 @@ public class ProfileSettingsTests extends Prepare {
     public void changeMonthSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(true);
-        profileSettingsPage.SelectRandomMonthSelectorItem(true);
-        profileSettingsPage.SelectRandomYearSelectorItem(true);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(true, true, true);
         String previousValue = profileSettingsPage.getMonthFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getMonthFieldText());
     }
 
@@ -180,21 +131,14 @@ public class ProfileSettingsTests extends Prepare {
     public void changeYearSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
         mainPage.userButtonClick();
         mainPage.settingsButtonClick();
-        profileSettingsPage.SelectRandomDaySelectorItem(true);
-        profileSettingsPage.SelectRandomMonthSelectorItem(true);
-        profileSettingsPage.SelectRandomYearSelectorItem(true);
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.SelectRandomBirthdayAndSubmit(true, true, true);
         String previousValue = profileSettingsPage.getYearFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
+        driver.navigate().refresh();
         Assert.assertEquals(previousValue, profileSettingsPage.getYearFieldText());
     }
 
@@ -202,7 +146,6 @@ public class ProfileSettingsTests extends Prepare {
     public void changeCountrySelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
@@ -210,13 +153,10 @@ public class ProfileSettingsTests extends Prepare {
         mainPage.settingsButtonClick();
         profileSettingsPage.loadingCountryWait();
         profileSettingsPage.SelectRandomCountrySelectorItem();
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.submitButtonClickAndSuccessfulWait();
         String previousValue = profileSettingsPage.getCountryFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
+        driver.navigate().refresh();
         profileSettingsPage.loadingCountryWait();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getCountryFieldText());
     }
 
@@ -224,7 +164,6 @@ public class ProfileSettingsTests extends Prepare {
     public void changeRegionSelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
@@ -234,13 +173,10 @@ public class ProfileSettingsTests extends Prepare {
         profileSettingsPage.SelectRandomCountrySelectorItem();
         profileSettingsPage.loadingRegionWait();
         profileSettingsPage.SelectRandomRegionSelectorItem();
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.submitButtonClickAndSuccessfulWait();
         String previousValue = profileSettingsPage.getRegionFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
+        driver.navigate().refresh();
         profileSettingsPage.loadingRegionWait();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getRegionFieldText());
     }
 
@@ -248,7 +184,6 @@ public class ProfileSettingsTests extends Prepare {
     public void changeCitySelector () {
 
         MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         ProfileSettingsPage profileSettingsPage = PageFactory.initElements(driver, ProfileSettingsPage.class);
         mainPage.open();
         loginCheckAndSignIn();
@@ -260,25 +195,10 @@ public class ProfileSettingsTests extends Prepare {
         profileSettingsPage.SelectRandomRegionSelectorItem();
         profileSettingsPage.loadingCityWait();
         profileSettingsPage.SelectRandomCitySelectorItem();
-        profileSettingsPage.submitButtonClickAndSuccessfullWait();
+        profileSettingsPage.submitButtonClickAndSuccessfulWait();
         String previousValue = profileSettingsPage.getCityFieldText();
-        mainPage.open();
-        mainPage.userButtonClick();
-        mainPage.settingsButtonClick();
+        driver.navigate().refresh();
         profileSettingsPage.loadingCityWait();
-//        profileSettingsPage.SelectRandomGenderItemAndSubmit();
         Assert.assertEquals(previousValue, profileSettingsPage.getCityFieldText());
     }
-
-//    @Test(testName = "Should log out from the site")
-//    public void logout() {
-//
-//        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-//        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-//        mainPage.open();
-//        loginCheckAndSignIn();
-//        mainPage.userButtonClick();
-//        mainPage.signOutButtonClick();
-//        Assert.assertTrue(mainPage.loginButtonIsDisplayed());
-//    }
 }
